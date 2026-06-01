@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Check In</title>
+</head>
+<body>
+
+<h2>Apertura WhatsApp...</h2>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+let numero = params.get("n");
+
+navigator.geolocation.getCurrentPosition(function(position) {
+
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    let messaggio =
+`INIZIO TURNO
+
+Posizione:
+https://maps.google.com/?q=${lat},${lon}`;
+
+    let url = `https://wa.me/${numero}?text=${encodeURIComponent(messaggio)}`;
+
+    window.location.href = url;
+
+}, function() {
+
+    alert("Posizione non autorizzata");
+
+});
+
+</script>
+
+</body>
+</html>
